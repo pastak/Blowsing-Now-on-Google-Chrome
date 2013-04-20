@@ -1,15 +1,16 @@
 {
-	"name": "Blowsing Now for Google Chrome™,
-	"version": "0.9.5",
+	"name": "Blowsing Now for Google Chrome™",
+	"version": "1.0.0",
 	"description": "Blowsing Now Google Chrome Extension",
 	"icons": { "48": "48icon.png",
 				"128": "128icon.png" },
 	"browser_action": {
 		"default_icon": "icon.png",
-		"popup": "popup.html"
+		"default_popup": "popup.html"
 	},
 	"permissions": [
 		"tabs",
 		"http://pastak.cosmio.net/"
-  	]
+  	],
+	"manifest_version": 2
 }
