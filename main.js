@@ -45,20 +45,21 @@ chrome.tabs.getSelected(_window.id, function(tab){
 });
 });
 }
-function blowsingnow(){
+function blowsingnow(e){
+	e.preventDefault();
 	document.getElementById("prompt").style.display="none";
 	document.getElementById("sending").style.display="block";
 	chrome.windows.getCurrent(function(_window){
 		chrome.tabs.getSelected(_window.id, function(tab){
-			console.log('aaa');
+			//console.log('aaa');
 			var Config = JSON.parse(localStorage.BlowsingNowConfigData);
 		  	var url=tab.url;
 		  	var title=tab.title;
 		  	var token=Config['token'].replace(/\'/g,"");
 		  	var secret=Config['secret'].replace(/\'/g,"");
 		  	var text=document.getElementById('userinput').value;
-		  	var req=("http://pastak.cosmio.net/browsing_now_chrome/submit.php"+"?url="+encodeURIComponent(url)+"&title="+encodeURIComponent(title)+"&token="+token+"&secret="+secret+"&text="+encodeURIComponent(text));
-		    console.log(req);
+		  	var req=("http://pastak.cosmio.net/browsing_now_chrome/submit.php"+"?url="+encodeURI(url)+"&title="+encodeURI(title)+"&token="+token+"&secret="+secret+"&text="+encodeURI(text));
+		    //console.log(req);
 		    var xhr=new XMLHttpRequest();
 		    xhr.open("get",req,false);
 		    xhr.onreadystatechange=function(){
@@ -83,13 +84,17 @@ function load(){
 		document.body.style.width="450px";
 		document.getElementById("prompt").style.display="block";
 		document.getElementById("userinput").focus();
-		preview();
+		preview({keyCode:null});
 	}else{
 		document.body.style.width="400px";
 		document.getElementById("oauth").style.display="block";
 	};
 }
-function preview(){
+function preview(e){
+//console.log(e.keyCode);
+if(e.keyCode == 13){
+	//blowsingnow();
+}else{
 chrome.windows.getCurrent(function(_window){
 	chrome.tabs.getSelected(_window.id, function(tab){
 		var u=document.getElementById("userinput").value;
@@ -100,15 +105,12 @@ chrome.windows.getCurrent(function(_window){
 	})
 })
 }
+}
 
 
 document.addEventListener('DOMContentLoaded', function () {
-	document.getElementById('form').addEventListener('submit',function(){
-		console.log('aa');
-		blowsingnow();
-		//return false;
-	})
 	document.getElementById('sendButton').addEventListener('click',blowsingnow);
+	document.getElementById('form').addEventListener('submit',blowsingnow);
 	document.getElementById('userinput').addEventListener('keydown',preview);
 	document.getElementById('userinput').addEventListener('keypress',preview);
 	document.getElementById('jumpOAuth').addEventListener('click',open_oauth);

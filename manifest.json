@@ -1,6 +1,6 @@
 {
 	"name": "Blowsing Now for Google Chrome™",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "Blowsing Now Google Chrome Extension",
 	"icons": { "48": "48icon.png",
 				"128": "128icon.png" },
