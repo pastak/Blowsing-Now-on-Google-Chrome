@@ -58,7 +58,7 @@ function blowsingnow(e){
 		  	var token=Config['token'].replace(/\'/g,"");
 		  	var secret=Config['secret'].replace(/\'/g,"");
 		  	var text=document.getElementById('userinput').value;
-		  	var req=("http://pastak.cosmio.net/browsing_now_chrome/submit.php"+"?url="+encodeURI(url)+"&title="+encodeURI(title)+"&token="+token+"&secret="+secret+"&text="+encodeURI(text));
+		  	var req=("http://pastak.cosmio.net/browsing_now_chrome/submit.php"+"?url="+encodeURIComponent(url)+"&title="+encodeURIComponent(title)+"&token="+token+"&secret="+secret+"&text="+encodeURIComponent(text));
 		    //console.log(req);
 		    var xhr=new XMLHttpRequest();
 		    xhr.open("get",req,false);
